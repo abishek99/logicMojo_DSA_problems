@@ -7,13 +7,15 @@ public class PairsClosestToSum {
 
     public static int closestToZero(int[] arr) {
         Arrays.sort(arr);
-        int l = 0;
-        int r = arr.length-1;
-        int closestSum = arr[l] + arr[r];
+        int l = 0, r = arr.length-1;
+        int closestSum = Integer.MAX_VALUE;
         while (l < r) {
             int currentSum = arr[l] + arr[r];
-            if (Math.abs(currentSum) < Math.abs(closestSum)) {
+            if (Math.abs(closestSum) > Math.abs(currentSum)) {
                 closestSum = currentSum;
+            }
+            if (Math.abs(closestSum) ==  Math.abs(currentSum)) {
+                closestSum  = Math.max(closestSum, currentSum);
             }
             if (currentSum == 0) {
                 return 0;
@@ -26,11 +28,4 @@ public class PairsClosestToSum {
         return closestSum;
     }
 
-
-
-    public static void main(String[] args) {
-        //int[] arr = new int[]{-21, -67, -37, -18, 4, -65};
-        int[] arr = new int[] {-8,-66,-60};
-        System.out.println(closestToZero(arr));
-    }
 }
